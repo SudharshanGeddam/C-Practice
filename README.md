@@ -1,4 +1,3 @@
-# C-Basics-to-Advanced
 # Daily C Programming Practice
 
 This repository contains my daily practice programs in the C programming language. I'm using **Dev C++** as my primary IDE and writing code to strengthen my understanding of C from the ground up.
@@ -29,7 +28,15 @@ This repository contains my daily practice programs in the C programming languag
 ## 📁 Structure
 Each topic is organized into separate folders for easy navigation. File names are self-descriptive for quick identification.
 
+
+## ✅ How to Run
+1. Open any `.c` file using Dev C++.
+2. Compile and run using `F9` or `Execute > Compile & Run`.
+
 ## 📅 Commit History
 I aim to commit at least one program each day to build consistency and track my learning progress.
 
+
 Feel free to star ⭐ the repo or suggest improvements if you're a fellow learner!
+
+
