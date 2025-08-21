@@ -1,0 +1,217 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+struct node *head = NULL;
+struct node *newnode, *temp;
+int count = 0;
+
+void CreateList() {
+    int choice = 1;
+
+    while (choice == 1) {
+        newnode = (struct node*) malloc(sizeof(struct node));
+        if (newnode == NULL) {
+            printf("Memory allocation failed\n");
+            return;
+        }
+
+        printf("Enter data: ");
+        scanf("%d", &newnode->data);
+        newnode->next = NULL;
+
+        if (head == NULL) {
+            head = temp = newnode;
+        } else {
+            temp->next = newnode;
+            temp = newnode;
+        }
+
+        printf("Do you want to continue? (1 = Yes, 0 = No): ");
+        scanf("%d", &choice);
+    }
+}
+void DisplayList() {
+    temp = head;
+    if (temp == NULL) {
+        printf("List is empty.\n");
+        return;
+    }
+
+    printf("The data present in the nodes are: ");
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+        count++;
+    }
+    printf("NULL\n");
+}
+void InsertAtBeginning()
+{
+	newnode = (struct node*) malloc (sizeof(struct node));
+	printf("\nEnter the data you want to insert: ");
+	scanf("%d", &newnode->data);
+	if(head != NULL)
+	{
+		newnode->next = head;
+		head = newnode;
+	}
+	printf("\nData after insertion:\n");
+	DisplayList();
+}
+void InsertAtEnd()
+{
+	temp = head;
+	if(temp == NULL)
+	{
+		printf("List is empty.");
+		return;
+	}
+	newnode = (struct node*) malloc(sizeof(struct node));
+	printf("\nEnter the data you want to insert: ");
+	scanf("%d", &newnode->data);
+	newnode->next = NULL;
+	while(temp->next != NULL)
+	{
+		temp = temp->next;
+	}
+	temp->next = newnode;
+	printf("\nData after insertion:\n");
+	DisplayList();
+}
+void InsertAtSpecifiedPosition()
+{
+	struct node *temp = head;
+	int pos, i = 1;
+	printf("\nEnter the position where you want to insert: ");
+	scanf("%d", &pos);
+	if(pos > count)
+	{
+		printf("\nInvalid position");
+	}
+	newnode = (struct node*) malloc (sizeof(struct node));
+	printf("\nEnter the data you want to insert: ");
+	scanf("%d", &newnode->data);
+	while(i < pos)
+	{
+		temp = temp->next;
+		i++;
+	}
+	newnode->next = temp->next;
+	temp->next = newnode;
+	printf("\nData after insertion:\n");
+	DisplayList();
+}
+void DeleteFromBeginning()
+{
+	temp = head;
+	if(head == NULL)
+	{
+		printf("No nodes present!");
+		free(head);
+	}
+	head = head->next;
+	free(temp);
+	printf("\nData after Deletion:\n");
+	DisplayList();
+}
+void DeleteAtEnd()
+{
+	struct node *prev;
+	temp = head;
+	while(temp->next!=NULL)
+	{
+		prev = temp;
+		temp = temp->next;
+	}
+	prev->next = NULL;
+	free(temp);
+	printf("\nData after Deletion:\n");
+	DisplayList();
+}
+void DeleteAtSpecifiedPosition()
+{
+	temp = head;
+	int pos,i = 1;
+	struct node *nextnode;
+	printf("\nEnter the position where you want to delete: ");
+	scanf("%d", &pos);
+	if(pos>count)
+	{
+		printf("\nInvalid Position");
+	}
+	while(i<pos-1)
+	{
+		temp = temp->next;
+		i++;
+	}
+	nextnode = temp->next;
+	temp->next = nextnode->next;
+	free(nextnode);
+	printf("\nData after Deletion:\n");
+	DisplayList();
+}
+int main() {
+	int choice1, choice2, opt;
+    CreateList();
+    DisplayList();
+    printf("\nDo you want to insert newnodes?(0 = No, 1 = Yes): ");
+    scanf("%d", &choice1);
+    if(choice1 == 1)
+    {
+    	printf("\nWhere you want to insert the newnode?[At Beginning = 1 or At End = 2 or At specified position = 3]:");
+    	scanf("%d", &opt);
+    	if(opt == 1)
+    	{
+    		InsertAtBeginning();
+		}
+		else if(opt == 2)
+		{
+			InsertAtEnd();
+		}
+		else if(opt == 3)
+		{
+			InsertAtSpecifiedPosition();
+		} 
+		else
+		{
+			printf("Invalid position\n");
+		}
+	} 
+	else if(choice1 == 0)
+	{
+		printf("\nDo you want to delete the nodes?[0 = No, 1 = Yes]:");
+		scanf("%d", &choice2);
+		if(choice2 == 1)
+		{
+			printf("\nWhere you want to delete the node?[At Beginning = 1 or At End = 2 or At specified position = 3]:");
+    		scanf("%d", &opt);
+    	if(opt == 1)
+    	{
+    		DeleteFromBeginning();
+		}
+		else if(opt == 2)
+		{
+			DeleteAtEnd();
+		}
+		else if(opt == 3)
+		{
+			DeleteAtSpecifiedPosition();
+		} 
+		else
+		{
+			printf("Invalid position\n");
+		}
+		}
+	}
+	else
+	{
+		printf("Invalid option");
+	}
+    return 0;
+}
+
