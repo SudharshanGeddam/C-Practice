@@ -155,6 +155,22 @@ void DeleteAtSpecifiedPosition()
 	printf("\nData after Deletion:\n");
 	DisplayList();
 }
+
+void ReverseList()
+{
+	struct node  *nextnode, *prevnode, *currentnode;
+	prevnode = NULL;
+	nextnode = currentnode = head;
+	while(nextnode != NULL)
+	{
+		nextnode = nextnode->next;
+		currentnode->next = prevnode;
+		prevnode = currentnode;
+		currentnode = nextnode;
+	}
+	head = prevnode;
+	DisplayList();
+}
 int main() {
 	int choice1, choice2, opt;
     CreateList();
@@ -206,7 +222,16 @@ int main() {
 		{
 			printf("Invalid position\n");
 		}
+		} 
+		else if(choice2 == 0)
+		{
+			int opt2;
+			printf("\nDo you want to reverse the list?[0 = No, 1 = Yes]: ");
+			scanf("%d", &opt2);
+			if(opt2 == 1)
+			ReverseList();
 		}
+		
 	}
 	else
 	{
