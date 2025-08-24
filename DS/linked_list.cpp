@@ -123,7 +123,7 @@ void DeleteAtEnd()
 {
 	struct node *prev;
 	temp = head;
-	while(temp->next!=NULL)
+	while(temp->next != NULL)
 	{
 		prev = temp;
 		temp = temp->next;
